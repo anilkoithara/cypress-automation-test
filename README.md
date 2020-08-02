@@ -19,11 +19,9 @@ git clone git@github.com:anilkoithara/cypress-automation-test.git
 ```
 or using `https` `git clone git clone https://github.com/anilkoithara/cypress-automation-test.git`
 
-and cd into `cypress-automation-test` folder
-
 ### Installation
 
-cd into the project folder and run the install command
+cd into `cypress-automation-test` folder and run the install command
 
 ```shell
 npm install
