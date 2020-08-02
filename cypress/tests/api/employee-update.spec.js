@@ -1,68 +1,53 @@
 /// <reference types="Cypress" />
 
-context("Challenging DOM", () => {
-  beforeEach(() => {
-    cy.visit("/");
-    cy.get("h2").should("contain", "Available Examples");
-  });
+const url = `${Cypress.env("apiUrl")}`;
 
-  it("Button ID's are changing dynamically after clicking red button", () => {
-    cy.get('a[href="/challenging_dom"]')
-      .should("contain", "Challenging DOM")
-      .click();
-    cy.get("h3").should("contain", "Challenging DOM");
-    cy.location("pathname").should("eq", "/challenging_dom");
+describe("Update Employee", function () {
+  it("Update employee details", function () {
+    //request to get all the employee, basically next request will not run if this request fails,
+    // in case of test performance issues we can remove this
+    cy.request({
+      method: "GET",
+      url: `${url}/employees`,
+      failOnStatusCode: false,
+    }).then((response) => {
+      expect(response.status).to.eq(200);
+      expect(response.body.data).to.have.length.of.at.least(1);
 
-    // get button ids before clicking
-    cy.get("a.button").first().invoke("attr", "id").as("blueButtonIds");
-    cy.get(".button.alert").invoke("attr", "id").as("redButtonIds");
-    cy.get(".button.success").invoke("attr", "id").as("greenButtonIds");
+      const employeeID = response.body.data[0].id;
+      const john = {
+        employee_name: "John Doe",
+        employee_salary: 50000,
+        employee_age: 60,
+        profile_image: "/john.png",
+      };
 
-    // click red button
-    cy.get(".button.alert").click();
-
-    //get button ids after clicking
-    cy.get(".button")
-      .first()
-      .invoke("attr", "id")
-      .as("blueButtonIdsAfterClick");
-    cy.get(".button.alert").invoke("attr", "id").as("redButtonIdsAfterClick");
-    cy.get(".button.success")
-      .invoke("attr", "id")
-      .as("greenButtonIdsAfterClick");
-
-    //compare ids after clicking the red button
-    cy.get("@blueButtonIdsAfterClick").then((blueBtn) => {
-      cy.get("@blueButtonIds").should("not.eq", blueBtn);
-    });
-    cy.get("@redButtonIdsAfterClick").then((redBtn) => {
-      cy.get("@redButtonIds").should("not.eq", redBtn);
-    });
-    cy.get("@greenButtonIdsAfterClick").then((greenBtn) => {
-      cy.get("@greenButtonIds").should("not.eq", greenBtn);
+      // update employee request
+      cy.request({
+        method: "PUT",
+        url: `${url}/update/${employeeID}`,
+        failOnStatusCode: false,
+        body: john,
+      }).then((response) => {
+        expect(response.status).to.eq(200);
+        expect(response.body.status).to.eq("success");
+        expect(response.body.data).deep.eq(john);
+        expect(response.body.message).to.eq(
+          "Successfully! Record has been updated."
+        );
+      });
     });
   });
 
-  it("Verify Dynamically Loaded Page Elements", () => {
-    cy.get("a").contains("Dynamic Loading").click();
-    cy.location("pathname").should("eq", "/dynamic_loading");
-    cy.get("h3").should("contain", "Dynamically Loaded Page Elements");
-
-    // click example 2 link
-    cy.get('a[href="/dynamic_loading/2"]')
-      .should("contain", "Example 2: Element rendered after the fact")
-      .click();
-    cy.get("h3").should("contain", "Dynamically Loaded Page Elements");
-    cy.get("h4").should(
-      "contain",
-      "Example 2: Element rendered after the fact"
-    );
-    cy.location("pathname").should("eq", "/dynamic_loading/2");
-
-    // click start button
-    cy.get("button").contains("Start").click();
-    cy.get("#loading").should("be.visible");
-    cy.get("h4").should("contain", "Hello World!");
-    cy.get("#loading").should("not.be.visible");
+  //unhappy scenario
+  it("Expect 400 response for invalid employee details", function () {
+    cy.request({
+      method: "PUT",
+      url: `${url}/update/^^%%`,
+      failOnStatusCode: false,
+    }).then((response) => {
+      expect(response.status).to.eq(400);
+      expect(response.body).to.eq("400 Bad Request");
+    });
   });
 });
