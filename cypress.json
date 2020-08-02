@@ -1,0 +1,13 @@
+{
+  "baseUrl": "https://the-internet.herokuapp.com",
+  "integrationFolder": "cypress/tests",
+  "defaultCommandTimeout": 8000,
+  "viewportWidth": 1090,
+  "viewportHeight": 1020,
+  "videoUploadOnPasses": false,
+  "reporter": "junit",
+  "env": {
+    "apiUrl": "http://dummy.restapiexample.com/api/v1",
+    "coverage": false
+  }
+}

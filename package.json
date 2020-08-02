@@ -1,0 +1,23 @@
+{
+  "name": "cypress-automation-test",
+  "version": "1.0.0",
+  "description": "A Simple UI and integration framework using Cypress testing methods, for cypress documentation, go to https://docs.cypress.io",
+  "main": "index.js",
+  "dependencies": {
+    "cypress": "~4.11.0"
+  },
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run --spec=\"cypress/tests/**/*.js\" --reporter junit --reporter-options mochaFile=results/my-test-output.xml,toConsole=true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anilkoithara/cypress-automation-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anilkoithara/cypress-automation-test/issues"
+  },
+  "homepage": "https://github.com/anilkoithara/cypress-automation-test#readme"
+}
