@@ -17,6 +17,9 @@ Install
 ```shell
 git clone git@github.com:anilkoithara/cypress-automation-test.git
 ```
+or using `https` `git clone git clone https://github.com/anilkoithara/cypress-automation-test.git`
+
+and cd into `cypress-automation-test` folder
 
 ### Installation
 
@@ -102,7 +105,7 @@ To make test scenarios more readable for products team and stake holder we can a
  - Configure to test to load the test data from a `fixture` file.
 
 
-## Technical debates
+## Tech debates
 
 - No specific elements identifer for automation for some of the elements.
 - Test should also include to verify the results getting updated after clicking on the red button but its a canvas elements unable to verify the text results. May be we can use screen shot testing.
