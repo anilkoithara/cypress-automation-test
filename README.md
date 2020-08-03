@@ -2,11 +2,11 @@
 
 Simple UI and integration feature using cypress, for more information about cypress and documentation, go to https://docs.cypress.io
 
-## Prerequisites 
+## Prerequisites
 
 If you’re using npm to install Cypress, please install Node.js 8 or above
 
-Install 
+Install
 
 `Node.js`
 
@@ -17,6 +17,7 @@ Install
 ```shell
 git clone git@github.com:anilkoithara/cypress-automation-test.git
 ```
+
 or using `https` `git clone git clone https://github.com/anilkoithara/cypress-automation-test.git`
 
 ### Installation
@@ -32,6 +33,7 @@ npm install
 ```shell
 npm run cy:open
 ```
+
 Cypress window will open and then click on the test you want to run
 
 ## Tests
@@ -41,10 +43,12 @@ Cypress window will open and then click on the test you want to run
 | api  | [cypress/tests/api](./cypress/tests/api) |
 | ui   | [cypress/tests/ui](./cypress/tests/ui)   |
 
-`heroku-app.spec.js` 
+`heroku-app.spec.js`
+
 - Contains two scenario - first scenario covers `Test 1:`, and second scenario covers `Test 2:`
 
 `employee-update.spec.js`
+
 - Contains two scenario - first scenario covers `Test 3:` and second scenario cover an unhappy path.
 
 - Base URL and other configuration can viewed inside `cypress.json` file
@@ -57,36 +61,40 @@ Cypress window will open and then click on the test you want to run
 npm install
 npm run cy:run
 ```
+
 - Test will start running one by one and generate xml reports and results files will be available in `\results` folder.
 - In case of test failure screenshot will capture automatically and placed in the `cypress\screenshots` folder, and test run `videos` also will be available in the `cypress\videos` folder.
 
-
 ## Framework and Feature improvements
 
-Improvement suggestions and options 
+Improvement suggestions and options
 
-### UI feature improvements 
+### UI feature improvements
 
-- We can load the element locators from `support\locators.js` file, 
+- We can load the element locators from `support\locators.js` file,
 
-`export default {
+```
+export default {
   //Dashboard
   link: "a[href="/challenging_dom"]",
   plus_icon: "[data-testid=new-search-icon]"
-  }`
+  }
+```
 
-then in test file we can import the file 
+then in test file we can import the file
 
-`import locators from "../../support/element_locators";`
+```
+import locators from "../../support/element_locators";
 ..........
 ..........
-`cy.(locators.link).should("contain", "Challenging DOM")`
+cy.(locators.link).should("contain", "Challenging DOM")
+```
 
 - cucumber
 
 To make test scenarios more readable for products team and stake holder we can add test scenario in `cucumber BDD` format,depends on the need and test clarity.
 
-- more Unhappy test scenario can also be included, like clicking the blue and green button 
+- more Unhappy test scenario can also be included, like clicking the blue and green button
 
 - `Code Coverage` matrix can be also be generated after test completions
 
@@ -94,14 +102,12 @@ To make test scenarios more readable for products team and stake holder we can a
 
 - Can add config file to run the test against different environment and url like stage,dev etc.
 
-- Can add test run in mobile browser 
- 
+- Can add test run in mobile browser
 
- ### API feature improvements
+### API feature improvements
 
- - `Schema` validation can be added to verify the API response format and structure return from the API calls.
- - Configure to test to load the test data from a `fixture` file.
-
+- `Schema` validation can be added to verify the API response format and structure return from the API calls.
+- Configure to test to load the test data from a `fixture` file.
 
 ## Tech debates
 
