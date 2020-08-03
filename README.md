@@ -90,7 +90,7 @@ import locators from "../../support/element_locators";
 cy.(locators.link).should("contain", "Challenging DOM")
 ```
 
-- cucumber - `https://cucumber.io`
+- cucumber - https://cucumber.io
 
 To make test scenarios more readable for products team and stake holder we can add test scenario in `cucumber BDD` format,depends on the need and test clarity.
 
